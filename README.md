@@ -26,4 +26,4 @@ once image is uploaded through **Upload** button and submitted through **Submit*
  >* export FLASK_ENV=development
 
 
-**Image Folder is not required**
+**images Folder is not required**
