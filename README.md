@@ -24,3 +24,6 @@ once image is uploaded through **Upload** button and submitted through **Submit*
  
  >* export FLASK_APP=app.py
  >* export FLASK_ENV=development
+
+
+**Image Folder is not required**
