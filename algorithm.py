@@ -3,18 +3,20 @@ import numpy as np
 
 
 def check_horizontal_and_vertical(image):
-    print(image)
+    '''
+    Checks if the iamge is potrait or landscape 
+    
+    '''
+   
     input_image = cv2.imread(image)
-
     height, width , _ = input_image.shape
     print("height is {} and width is {}".format(height, width))
-
+    
     if height > width:
         image_orientation = "Potrait"
         return input_image
     
     elif height == width:
-        
         image_orientation = "Sqaure"
         return input_image
     
@@ -25,9 +27,14 @@ def check_horizontal_and_vertical(image):
 
 
 def correct_image_alignment(image_url):
+    
+    '''
+    Takes image and decided it's orientation,
+    performs the alignment corretness
+    Returns the final corrected image
+    '''
 
     image = check_horizontal_and_vertical(image_url)
-    # image = check_horizontal_and_vertical()
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray = cv2.bitwise_not(gray)
     thresh = cv2.threshold(gray, 0, 255,
@@ -44,15 +51,14 @@ def correct_image_alignment(image_url):
         print("choosen 2nd")
     else:
         angle = - angle
-        print("chossen 3rd")
     print("choosen angle to rotate" , angle)
     (h, w) = image.shape[:2]
     center = (w/2 , h/2 )
     Image_rotation = cv2.getRotationMatrix2D(center, angle, 1.0)
 
-    rotated = cv2.warpAffine(image, Image_rotation, (w, h),
+    corrected_image = cv2.warpAffine(image, Image_rotation, (w, h),
         flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
     
-    return rotated
+    return corrected_image
     
     
